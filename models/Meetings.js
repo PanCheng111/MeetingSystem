@@ -18,6 +18,7 @@ var MeetingsSchema = new Schema({
     name:  String,
     subject: String,
     state: { type: String, default : "已开启" },
+    schedule: {type: [String], default : []},
     attendGroups : {type: [String], ref: ["Groups"]},
     attendUsers : {type: [String], ref: ["Users"]},
 });

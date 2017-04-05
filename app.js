@@ -1,4 +1,6 @@
 var express = require('express');
+var session = require('express-session');
+
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -10,6 +12,8 @@ var partials = require('express-partials');
 
 var index = require('./routes/index');
 var admin = require('./routes/admin');
+var adminCtrl = require('./routes/adminCtrl');
+var settings = require('./models/db/settings');
 
 //允许跨域访问
 var cors = require('cors')
@@ -29,6 +33,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+    secret: settings.session_secret,
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(function(req, res, next){
+//    针对注册会员
+    res.locals.logined = req.session.logined;
+    next();
+});
+
+
 app.use('/api', cors());
 app.use('/api', express.static(path.join(__dirname, 'public')));
 
@@ -36,6 +53,7 @@ app.use('/api', express.static(path.join(__dirname, 'public')));
 app.use(require('express-promise')());
 
 app.use('/', index);
+app.use('/admin', adminCtrl);
 app.use('/admin', admin);
 app.use('/api', admin);
 

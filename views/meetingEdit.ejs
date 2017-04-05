@@ -1,0 +1,49 @@
+<div class="row" ng-controller="MeetingEdit">
+    <% include public/modal %>
+    <div class="col-xs-12">
+
+        <div class="box">
+            <div class="box-body table-responsive no-padding" >
+                <table align="center">
+                    <tr>
+                        <td><h4>会议名称：</h4></td><td><h4>{{meeting.name}}</h4></td>
+                    </tr>
+                    <tr>
+                        <td><h4>会议主题：</h4></td><td><h4>{{meeting.subject}}</h4></td>
+                    </tr>
+                </table>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+        <div class="box">
+            <div class="box-body table-responsive no-padding" >                
+                <div class="panel">
+                    <a href="#addNewMeeting" role="button" class="btn btn-primary btn-sm" data-toggle="modal" style="float: left"><span class="fa fa-plus-square" aria-hidden="true">&nbsp;</span>添加议程</a>
+                    <a href="#addNewMeeting" role="button" class="btn btn-primary btn-sm" data-toggle="modal" style="float: right"><span class="fa fa-plus-square" aria-hidden="true">&nbsp;</span>重置议程</a>
+                    <h4 style="align-content:center" align="center">会议议程：</h4>
+                </div>
+                
+                <ol ng-repeat="schedule in meeting.schedules">
+                    <li>
+                       <h5> {{meeting.schedule}} </h5>
+                    </li>
+                </ol>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+         <div class="box">
+            <div class="box-body table-responsive no-padding" >                
+                <div class="panel">
+                    <a href="#addNewMeeting" role="button" class="btn btn-primary btn-sm" data-toggle="modal" style="float: left"><span class="fa fa-plus-square" aria-hidden="true">&nbsp;</span>添加用户</a>
+                    <a href="#addNewMeeting" role="button" class="btn btn-primary btn-sm" data-toggle="modal" style="float: right"><span class="fa fa-plus-square" aria-hidden="true">&nbsp;</span>添加用户组</a>
+                    <h4 align="center">会议成员：</h4>
+                </div>
+                
+                <ol ng-repeat="user in meeting.users">
+                    <li>
+                       <h5> {{meeting.schedule}} </h5>
+                    </li>
+                </ol>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->       
+    </div><!-- /.col -->
+</div>

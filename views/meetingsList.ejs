@@ -26,7 +26,7 @@
                     </tr>
                     <tr class="datalist" ng-repeat="meeting in data">
                         <td><input type="checkbox" name="listItem" class="mini" value="{{meeting._id}}" ng-click="getNewIds()"/></td>
-                        <td class=" ">{{meeting.name}}</td>
+                        <td class=" "><a href="/admin/manage/meetingsList/edit?id={{meeting._id}}">{{meeting.name}}</a></td>
                         <td class=" ">{{meeting.subject}}</td>
                         <td class=" ">{{meeting.state}}</td>
                         <td class=" ">

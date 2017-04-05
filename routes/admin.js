@@ -20,21 +20,71 @@ var Users = require('../models/Users');
 var Groups = require("../models/Groups");
 var Meetings = require('../models/Meetings');
 
-/* GET home page. */
-router.get('/login', function(req, res, next) {
+var PW = require('png-word');
+var RW = require('../util/randomWord');
+var rw = RW('abcdefghijklmnopqrstuvwxyz1234567890');
+var pngword = new PW(PW.GRAY);
+
+
+//管理员登录页面
+router.get('/', function(req, res) {
+    req.session.vnum = rw.random(4);
     res.render('login');
 });
 
+//刷新验证码
+router.get('/vnum',function(req, res){
+    var word = req.session.vnum;
+    pngword.createPNG(word,function(word){
+        res.end(word);
+    })
+});
+
+// /* GET home page. */
+// router.get('/login', function(req, res, next) {
+//     res.render('login');
+// });
+
 router.post('/doLogin', function(req, res, next) {
-    console.log("req.body=", req.body);
-    if (req.body.userName == 'admin' && req.body.password == 'admin') res.send('success');
-    else res.end('unsuccess');
+
+    var userName = req.body.userName;
+    var password = req.body.password;
+    var vnum = req.body.vnum;
+    var newPsd = DbOpt.encrypt(password,settings.encrypt_key);
+
+    if(vnum != req.session.vnum){
+        req.session.vnum = rw.random(4);
+        res.end('验证码有误！');
+    }else{
+            Users.findOne({'userName':userName,'password':newPsd}).populate('group').exec(function(err,user){
+                if(err){
+                    res.end(err);
+                }
+                if(user) {
+                    //req.session.adminPower = user.group.power;
+                    req.session.logined = true;
+                    //获取管理员通知信息
+                    res.end("success");
+                }else{
+                    console.log("登录失败");
+                    res.end("用户名或密码错误");
+                }
+            });
+
+    }
+
+
 });
 
 router.get('/manage', function(req, res, next) {
-    res.render('index', {title: 'Express', page_header: "主页", layout: 'main'});
+    res.render('index', {title: '欢迎进入无纸化会议系统管理后台', page_header: "管理后台", layout: 'main'});
 });
 
+// 管理员退出
+router.get('/logout', function(req, res) {
+    req.session.logined = false;
+    res.redirect("/admin");
+});
 
 
 //-------------------------对象列表查询开始(带分页)-------------------------------
@@ -313,6 +363,15 @@ router.get('/manage/meetingsList', function(req, res) {
 
 router.get('/manage/meetingsList/list', function(req, res) {
     DbOpt.findAll(Meetings, req, res, "request adminMeetingsList")
+});
+
+router.get('/manage/meetingsList/edit', function(req, res) {
+    var params = url.parse(req.url,true);
+    var meetingId = params.query.id;
+    res.render('meetingEdit', {
+        page_header: "会议设置",
+        layout: 'main'
+    })
 });
 
 

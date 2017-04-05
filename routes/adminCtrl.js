@@ -16,7 +16,7 @@ function isAdminLogined(req){
     return req.session.logined;
 }
 
-router.get(["/","/*"],function(req,res,next){
+router.get(["/manage","/manage/*"],function(req,res,next){
     if(isAdminLogined(req)){
         next();
     }else{

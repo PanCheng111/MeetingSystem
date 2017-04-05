@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://localhost:81/admin/manage -->
+<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-animate-anchor{position:absolute;}</style>
+    
+    <title>前端开发俱乐部</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.2 -->
+    <link href="./前端开发俱乐部_files/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- Font Awesome Icons -->
+    <link href="./前端开发俱乐部_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!--数据表格相关样式-->
+    <link href="./前端开发俱乐部_files/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+    <!-- Theme style -->
+    <link href="./前端开发俱乐部_files/AdminLTE.min.css" rel="stylesheet" type="text/css">
+
+    <link href="./前端开发俱乐部_files/skin-blue.min.css" rel="stylesheet" type="text/css">
+
+
+    <!--百度编辑器-->
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="./前端开发俱乐部_files/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="./前端开发俱乐部_files/ueditor.all.js"></script>
+    <!--jquery-->
+    <script src="./前端开发俱乐部_files/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <!--zTree树形组件-->
+    <link rel="stylesheet" href="./前端开发俱乐部_files/zTreeStyle.css" type="text/css">
+    <script type="text/javascript" src="./前端开发俱乐部_files/jquery.ztree.all-3.5.js"></script>
+
+    <!--uploadify-->
+    <link href="./前端开发俱乐部_files/uploadify.css" rel="stylesheet" type="text/css">
+    <script src="./前端开发俱乐部_files/jquery.uploadify.min.js"></script>
+
+    <!--doraPlugs-->
+    <link rel="stylesheet" href="./前端开发俱乐部_files/dora.css">
+    <script src="./前端开发俱乐部_files/dora.js"></script>
+
+    <!--幻灯片插件开始-->
+    <script type="text/javascript" src="./前端开发俱乐部_files/jquery.fancybox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./前端开发俱乐部_files/jquery.fancybox.css" media="screen">
+
+    <script src="./前端开发俱乐部_files/dora.public.js"></script>
+    <script src="./前端开发俱乐部_files/dora.backstage.js"></script>
+    <link rel="stylesheet" href="./前端开发俱乐部_files/style.css">
+
+<style type="text/css">.fancybox-margin{margin-right:0px;}</style></head>
+
+<body class="skin-blue ng-scope" ng-app="adminApp">
+
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="http://localhost:81/admin/manage" class="logo"><b>Dora</b>CMS</a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="http://localhost:81/admin/manage#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account Menu -->
+                    
+                    <!-- Notifications: style can be found in dropdown.less -->
+                    <li class="dropdown notifications-menu">
+                        <a href="http://localhost:81/admin/manage#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            
+                            <span class="label label-warning">3</span>
+                            
+                        </a>
+                        <ul class="dropdown-menu">
+                            
+                                <li class="header">您有3条提醒</li>
+                            
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    
+                                        <li>
+                                            <a href="http://localhost:81/admin/manage/sysTemBackStageNotice">
+                                                <i class="fa fa-users text-aqua"></i> 新增&nbsp;<span class="text-red">1</span>&nbsp;位注册用户
+                                            </a>
+                                        </li>
+                                    
+                                    
+                                    <li>
+                                        <a href="http://localhost:81/admin/manage/sysTemBackStageNotice">
+                                            <i class="fa fa-envelope text-red"></i> <span class="text-red">2</span>&nbsp;位用户给您留言啦！
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="http://localhost:81/admin/manage/sysTemBackStageNotice">View all</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+
+                        <a href="http://localhost:81/admin/manage#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img alt="User Image" class="user-image" src="./前端开发俱乐部_files/defaultlogo.png">
+                            <span class="hidden-xs" id="adminUserName">pancheng</span>
+                            <input type="hidden" id="adminId" value="r16c6dqU">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="./前端开发俱乐部_files/defaultlogo.png" class="img-circle" alt="User Image">
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a href="http://localhost:81/admin/logout" class="btn btn-default btn-flat">退出</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- search form (Optional) -->
+            <form action="http://localhost:81/admin/manage#" method="get" class="sidebar-form ng-pristine ng-valid">
+                <div class="input-group">
+                    <input type="text" name="searchKey" class="form-control" placeholder="Search..." value="">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu">
+                <li class="header">Main Menu</li>
+                <!-- Optionally, you can add icons to the links -->
+                <input type="hidden" id="currentCate" value="sysTemManage">
+                <li class="treeview active" cid="sysTemManage">
+                    <a href="http://localhost:81/admin/manage#"><span>系统管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li cid="sysTemManage_user"><a href="http://localhost:81/admin/manage/adminUsersList"><i class="fa fa-user"></i> 系统用户管理</a></li>
+                        <li cid="sysTemManage_uGroup"><a href="http://localhost:81/admin/manage/adminGroupList"><i class="fa fa-group"></i> 用户组设定</a></li>
+                        <li cid="sysTemManage_ads"><a href="http://localhost:81/admin/manage/adsList"><i class="fa fa-camera-retro"></i> 广告管理</a></li>
+                        <li cid="sysTemManage_files"><a href="http://localhost:81/admin/manage/filesList"><i class="fa fa-file-text"></i> 文件管理器</a></li>
+                        <li cid="sysTemManage_data">
+                            <a href="http://localhost:81/admin/manage#"><i class="fa fa-cloud"></i> 数据管理<i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li cid="sysTemManage_data_1"><a href="http://localhost:81/admin/manage/backUpData"><i class="fa fa-copy"></i> 数据备份</a></li>
+                            </ul>
+                        </li>
+                        <li cid="sysTemManage_logs"><a href="http://localhost:81/admin/manage/systemLogs"><i class="fa fa-fw fa-clipboard"></i> 系统日志管理</a></li>
+                    </ul>
+                </li>
+                <li class="treeview" cid="contentManage">
+                    <a href="http://localhost:81/admin/manage#"><span>文档管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li cid="contentManage_content"><a href="http://localhost:81/admin/manage/contentList"><i class="fa fa-file-text-o"></i> 文档管理</a></li>
+                        <li cid="contentManage_cateGory"><a href="http://localhost:81/admin/manage/contentCategorys"><i class="fa fa-clipboard"></i> 文档类别管理</a></li>
+                        <li cid="contentManage_tag"><a href="http://localhost:81/admin/manage/contentTags"><i class="fa fa-tags"></i> 文档标签管理</a></li>
+                        <li cid="contentManage_temp">
+                            <a href="http://localhost:81/admin/manage#"><i class="fa fa-dashboard"></i> 模板管理<i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li cid="contentManage_temp_1"><a href="http://localhost:81/admin/manage/contentTemps"><i class="fa fa-cog"></i> 模板配置</a></li>
+                            </ul>
+                            <ul class="treeview-menu">
+                                <li cid="contentManage_temp_2"><a href="http://localhost:81/admin/manage/contentTempsEdit"><i class="fa fa-edit"></i> 模板编辑</a></li>
+                            </ul>
+                        </li>
+                        <li cid="contentManage_msg"><a href="http://localhost:81/admin/manage/messageList"><i class="fa fa-comments"></i> 留言管理</a></li>
+                        <li cid="contentManage_notice">
+                            <a href="http://localhost:81/admin/manage#"><i class="fa fa-bullhorn"></i> 消息管理<i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li cid="contentManage_notice_1"><a href="http://localhost:81/admin/manage/systemNotice"><i class="fa fa-volume-up"></i> 公告管理</a></li>
+                            </ul>
+                            <ul class="treeview-menu hide">
+                                <li cid="contentManage_notice_2"><a href="http://localhost:81/admin/manage/userNotice"><i class="fa fa-male"></i> 用户消息</a></li>
+                            </ul>
+                            <ul class="treeview-menu">
+                                <li cid="contentManage_notice_3"><a href="http://localhost:81/admin/manage/sysTemBackStageNotice"><i class="fa fa-bell-o"></i> 系统消息</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview" cid="userManage">
+                    <a href="http://localhost:81/admin/manage#"><span>会员管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li cid="userManage_user"><a href="http://localhost:81/admin/manage/regUsersList"><i class="fa fa-users"></i> 注册会员列表</a></li>
+                    </ul>
+                </li>
+            </ul><!-- /.sidebar-menu -->
+
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="min-height: 584px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                前端开发俱乐部
+                <small>DoraCMS后台管理</small>
+                <input type="hidden" id="pageArea" value="">
+
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active"><a href="http://localhost:81/" target="_blank"><i class="fa fa-home"></i> 前台首页</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="row ng-scope" ng-controller="mainPanel">
+    
+<!--信息提示模态窗口-->
+<div class="modal fade bs-example-modal-sm" id="askifdo">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h5 class="modal-title ng-binding"></h5>
+            </div>
+            <div class="modal-body">
+                <div class="text-warning ng-binding"><i class="icon fa fa-warning"></i>&nbsp;</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--提示确认模态窗口-->
+<div class="modal fade bs-example-modal-sm" id="checkIfDo">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h5 class="modal-title">提示</h5>
+            </div>
+            <div class="modal-body">
+                <h4><i class="icon fa fa-warning"></i>&nbsp;<span class="modal-msg"></span></h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-xs" ng-click="confirmDo(targetID)">确认</button>
+                <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h5 class="box-title">概况</h5>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <ul class="row text-info main-statistics">
+                            <div class="col-md-6">
+                                <li><i class="fa fa-fw fa-user"></i> 管理员 <span ng-bind="mainData.adminUserCount" class="ng-binding">1</span></li>
+                                <li><i class="fa fa-fw fa-users"></i> 用户 <span ng-bind="mainData.regUsersCount" class="ng-binding">1</span></li>
+                                <li><i class="fa fa-fw fa-file-text-o"></i> 文档 <span ng-bind="mainData.contentsCount" class="ng-binding">1</span></li>
+                                <li><i class="fa fa-fw fa-comments-o"></i> 留言 <span ng-bind="mainData.msgCount" class="ng-binding">3</span></li>
+                            </div>
+                            <div class="col-md-6">
+                                <!--<li><i class="fa fa-fw fa-comments-o"></i> 留言 {{mainData.msgCount}}</li>-->
+                            </div>
+                        </ul>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div><!-- ./col -->
+            <div class="col-md-6">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <!--<i class="fa fa-location-arrow"></i>-->
+                        <h5 class="box-title">快捷操作</h5>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <a class="btn btn-app" href="http://localhost:81/admin/manage/adminUsersList">
+                            <i class="fa fa-user"></i> 添加管理员
+                        </a>
+                        <a class="btn btn-app" href="http://localhost:81/admin/manage/content/add/content">
+                            <i class="fa fa-file-text-o"></i> 创建新会议
+                        </a>
+                        <!--
+                        <a class="btn btn-app" href="/admin/manage/content/add/plug">
+                            <i class="fa fa-github"></i> 添加Jquery插件
+                        </a>
+                        -->
+                        <a class="btn btn-app" href="http://localhost:81/admin/manage/dataManage/m/backUpData">
+                            <i class="fa fa-cloud"></i> 数据备份
+                        </a>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div><!-- ./col -->
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h5 class="box-title">近期评论</h5>
+                    </div><!-- /.box-header -->
+                    <div class="box-body chat" id="chat-box">
+                        <div class="direct-chat-messages" style="height: auto;max-height: 500px;">
+                            <!-- ngRepeat: msg in mainData.msgList --><div class="direct-chat-msg ng-scope" ng-repeat="msg in mainData.msgList">
+                                <div ng-switch="" on="msg.utype">
+                                    <!-- ngSwitchWhen: 0 --><span ng-switch-when="0" class="ng-scope">
+                                        <div class="direct-chat-info clearfix">
+                                            <span class="direct-chat-name pull-left">
+                                                 <a href="http://localhost:81/admin/manage#" class="ng-binding">pancheng</a>
+                                                在 《<a href="http://localhost:81/details/HJymN1gv.html" target="_blank" ng-bind="msg.contentTitle" class="ng-binding">1231231</a>》 中说
+                                            </span>
+                                            <span class="direct-chat-timestamp pull-right"><i class="fa fa-clock-o"></i> <span ng-bind="msg.date | date : &#39;yyyy-MM-dd HH:mm:ss&#39;" class="ng-binding">2016-07-11 20:11:26</span></span>
+                                        </div><!-- /.direct-chat-info -->
+                                        <img alt="message user image" ng-src="/upload/images/defaultlogo.png" class="direct-chat-img" src="./前端开发俱乐部_files/defaultlogo.png"><!-- /.direct-chat-img -->
+                                        <div class="direct-chat-text ng-binding" ng-bind="msg.content"> sdfafs</div><!-- /.direct-chat-text -->
+                                    </span><!-- end ngSwitchWhen: -->
+                                    <!-- ngSwitchWhen: 1 -->
+                                </div>
+                            </div><!-- end ngRepeat: msg in mainData.msgList --><div class="direct-chat-msg ng-scope" ng-repeat="msg in mainData.msgList">
+                                <div ng-switch="" on="msg.utype">
+                                    <!-- ngSwitchWhen: 0 --><span ng-switch-when="0" class="ng-scope">
+                                        <div class="direct-chat-info clearfix">
+                                            <span class="direct-chat-name pull-left">
+                                                 <a href="http://localhost:81/admin/manage#" class="ng-binding">pancheng</a>
+                                                在 《<a href="http://localhost:81/details/HJymN1gv.html" target="_blank" ng-bind="msg.contentTitle" class="ng-binding">1231231</a>》 中说
+                                            </span>
+                                            <span class="direct-chat-timestamp pull-right"><i class="fa fa-clock-o"></i> <span ng-bind="msg.date | date : &#39;yyyy-MM-dd HH:mm:ss&#39;" class="ng-binding">2016-07-11 20:11:16</span></span>
+                                        </div><!-- /.direct-chat-info -->
+                                        <img alt="message user image" ng-src="/upload/images/defaultlogo.png" class="direct-chat-img" src="./前端开发俱乐部_files/defaultlogo.png"><!-- /.direct-chat-img -->
+                                        <div class="direct-chat-text ng-binding" ng-bind="msg.content">asfaasfasdfadsf</div><!-- /.direct-chat-text -->
+                                    </span><!-- end ngSwitchWhen: -->
+                                    <!-- ngSwitchWhen: 1 -->
+                                </div>
+                            </div><!-- end ngRepeat: msg in mainData.msgList --><div class="direct-chat-msg ng-scope" ng-repeat="msg in mainData.msgList">
+                                <div ng-switch="" on="msg.utype">
+                                    <!-- ngSwitchWhen: 0 --><span ng-switch-when="0" class="ng-scope">
+                                        <div class="direct-chat-info clearfix">
+                                            <span class="direct-chat-name pull-left">
+                                                 <a href="http://localhost:81/admin/manage#" class="ng-binding">pancheng</a>
+                                                在 《<a href="http://localhost:81/details/HJymN1gv.html" target="_blank" ng-bind="msg.contentTitle" class="ng-binding">1231231</a>》 中说
+                                            </span>
+                                            <span class="direct-chat-timestamp pull-right"><i class="fa fa-clock-o"></i> <span ng-bind="msg.date | date : &#39;yyyy-MM-dd HH:mm:ss&#39;" class="ng-binding">2016-07-10 23:26:52</span></span>
+                                        </div><!-- /.direct-chat-info -->
+                                        <img alt="message user image" ng-src="/upload/images/defaultlogo.png" class="direct-chat-img" src="./前端开发俱乐部_files/defaultlogo.png"><!-- /.direct-chat-img -->
+                                        <div class="direct-chat-text ng-binding" ng-bind="msg.content">asdfassdasfdasfsf</div><!-- /.direct-chat-text -->
+                                    </span><!-- end ngSwitchWhen: -->
+                                    <!-- ngSwitchWhen: 1 -->
+                                </div>
+                            </div><!-- end ngRepeat: msg in mainData.msgList -->
+                        </div>
+                    </div><!-- /.chat -->
+
+                </div><!-- /.box -->
+            </div><!-- ./col -->
+            <div class="col-md-6">
+                <!-- USERS LIST -->
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h5 class="box-title">新注册用户</h5>
+                        <div class="box-tools pull-right">
+                            <span class="label label-danger">注册用户 <span ng-bind="mainData.regUsersCount" class="ng-binding">1</span></span>
+                        </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <ul class="users-list clearfix">
+                            <!-- ngRepeat: user in mainData.regUsers --><li ng-repeat="user in mainData.regUsers" class="ng-scope">
+                                <img ng-src="/upload/images/defaultlogo.png" alt="User Image" src="./前端开发俱乐部_files/defaultlogo.png">
+                                <a class="users-list-name ng-binding" href="http://localhost:81/admin/manage#" title="pancheng" ng-bind="user.userName">pancheng</a>
+                            </li><!-- end ngRepeat: user in mainData.regUsers -->
+                        </ul><!-- /.users-list -->
+                    </div><!-- /.box-body -->
+                    <div class="box-footer text-center">
+                        <a href="http://localhost:81/admin/manage/regUsersList" class="uppercase">View All Users</a>
+                    </div><!-- /.box-footer -->
+                </div><!--/.box -->
+            </div><!-- /.col -->
+        </div>
+    </div>
+</div>
+<!-- Your Page Content Here -->
+
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- Default to the left -->
+        <strong>Copyright © 2015 <a href="https://github.com/doramart/DoraCMS" target="_blank">DoraCMS v1.1.1</a>.</strong> All rights reserved.
+    </footer>
+
+</div><!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+
+<!-- Bootstrap 3.3.2 JS -->
+<script src="./前端开发俱乐部_files/bootstrap.min.js" type="text/javascript"></script>
+<!-- 数据表格插件开始 -->
+<!--<script src="/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>-->
+<!--<script src="/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>-->
+
+<!-- AdminLTE App -->
+<script src="./前端开发俱乐部_files/app.min.js" type="text/javascript"></script>
+<!--数据绑定-->
+<script src="./前端开发俱乐部_files/angular.min.js"></script>
+<script src="./前端开发俱乐部_files/controller.js"></script>
+<script src="./前端开发俱乐部_files/filters.js"></script>
+<script src="./前端开发俱乐部_files/directives.js"></script>
+
+
+<script>
+    $(function(){
+        var curerntCate = $("#currentCate").val();
+        var sv = $('li[cid="'+curerntCate+'"]');
+        $('.treeview-menu').removeClass('open-menu');
+        $(".sidebar-menu").find("li").removeClass('active');
+        sv.parents('li').addClass('active');
+        sv.addClass('active').parents('.treeview-menu').addClass('open-menu');
+    })
+</script>
+
+
+</body></html>

@@ -19,6 +19,7 @@ var settings = require("../models/db/settings");
 var Users = require('../models/Users');
 var Groups = require("../models/Groups");
 var Meetings = require('../models/Meetings');
+var Schedules = require('../models/Schedules');
 
 var PW = require('png-word');
 var RW = require('../util/randomWord');
@@ -72,7 +73,34 @@ router.post('/doLogin', function(req, res, next) {
             });
 
     }
+});
 
+router.get('/doLogin', function(req, res, next) {
+    var params = url.parse(req.url,true);
+    var userName = params.query.userName;
+    var password = params.query.password;
+
+    var newPsd = DbOpt.encrypt(password, settings.encrypt_key);
+
+
+            Users.findOne({'userName':userName,'password':newPsd}).populate('group').exec(function(err,user){
+                if(err){
+                    res.end(err);
+                }
+                if(user) {
+                    //req.session.adminPower = user.group.power;
+                    req.session.logined = true;
+                    //获取管理员通知信息
+                    res.json({
+                        status : 'success'
+                    });
+                }else{
+                    console.log("登录失败");
+                    res.json({
+                        status : 'fail'
+                    });
+                }
+            });
 
 });
 
@@ -164,8 +192,14 @@ router.get('/manage/:defaultUrl/item',function(req,res){
         Users.getOneItem(res, targetId, function(user){
             return res.json(user);
         });
-    }else{
-        DbOpt.findOne(targetObj, req, res,"find one obj success");
+    } else if (targetObj == Meetings) {
+        console.log("item here! targetId=" + targetId);
+        Meetings.getOneItem(res, targetId, function(meeting) {
+            return res.json(meeting);
+        });
+    }
+    else{
+        DbOpt.findOne(targetObj, req, res, "find one obj success");
     }
 
 });
@@ -349,6 +383,20 @@ router.get('/manage/usersList/list', function(req, res) {
     DbOpt.findAll(Users, req, res, "request adminUsersList")
 });
 
+router.get('/manage/usersList/findByName', function(req, res) {
+    var params = url.parse(req.url,true);
+    Users.findOneByName(res, params.query.name, function(user){
+        return res.json(user);
+    });
+});
+
+router.get('/manage/usersList/findByGroupName', function(req, res) {
+    var params = url.parse(req.url, true);
+    Users.findAllByGroupName(res, params.query.groupName, function(usersList) {
+        return res.json(usersList);
+    });
+});
+
 
 //--------------------会议管理开始
 router.get('/manage/meetingsList', function(req, res) {
@@ -369,10 +417,19 @@ router.get('/manage/meetingsList/edit', function(req, res) {
     var params = url.parse(req.url,true);
     var meetingId = params.query.id;
     res.render('meetingEdit', {
+        meeting_id: meetingId,
         page_header: "会议设置",
         layout: 'main'
     })
 });
+
+router.post('/manage/meetingsList/edit', function(req, res) {
+    var params = url.parse(req.url,true);
+    var meetingId = params.query.id;
+    var meetingInfo = req.body;
+    modifyMeetingInfo(res, meetingId, meetingInfo);
+});
+
 
 
 //-----------公共函数------
@@ -435,6 +492,19 @@ function addOneMeeting(req, res) {
             else DbOpt.addOne(Meetings, req, res);
         }
     });
+}
+
+//修改会议信息 
+function modifyMeetingInfo(res, meetingId, meetingInfo) {
+    Meetings.update({_id: meetingId}, {$set: meetingInfo}, function (err, result) {
+        if (err) {
+            res.end('修改会议出现错误');
+        }
+        else {
+            res.end('success');
+        }
+    });
+
 }
 
 module.exports = router;

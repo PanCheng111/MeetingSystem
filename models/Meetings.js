@@ -8,6 +8,7 @@ var Schema = mongoose.Schema;
 
 var Groups = require('./Groups');
 var Users = require('./Users');
+//var Schedules = require('./Schedules');
 
 var MeetingsSchema = new Schema({
     _id: {
@@ -18,19 +19,25 @@ var MeetingsSchema = new Schema({
     name:  String,
     subject: String,
     state: { type: String, default : "已开启" },
-    schedule: {type: [String], default : []},
-    attendGroups : {type: [String], ref: ["Groups"]},
-    attendUsers : {type: [String], ref: ["Users"]},
+    schedules: [{type: String}],
+    groupsAttend : [{type: String, ref: "Groups"}],
+    usersAttend : [{type: String, ref: "Users"}],
 });
 
 MeetingsSchema.statics = {
 
     getOneItem : function(res, targetId, callBack){
-        Users.findOne({'_id' : targetId}).populate('attendGroups').populate('attendUsers').exec(function(err, user){
+        Meetings.findOne({'_id' : targetId}).populate('groupsAttend')
+        .populate({
+            path:'usersAttend',
+            populate: {
+                path: 'group',
+            }
+        }).exec(function(err, meeting){
             if(err){
                 res.end(err);
             }
-            callBack(user);
+            callBack(meeting);
         })
     }
 

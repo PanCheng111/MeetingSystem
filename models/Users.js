@@ -30,7 +30,32 @@ UsersSchema.statics = {
             }
             callBack(user);
         })
+    },
+
+    findOneByName : function(res, targetName, callBack) {
+        Users.findOne({'userName' : targetName}).populate('group').exec(function(err, user) {
+            if (err) {
+                res.end(err);
+            }
+            callBack(user);
+        })
+    },
+
+    findAllByGroupName : function(res, targetGroupName, callBack) {
+        Users.find({}).populate('group').exec(function(err, usersList){
+            if (err) {
+                res.end(err);
+            }
+            else {
+                let filteredList = [];
+                for (let i = 0; i < usersList.length; i++)
+                    if (usersList[i].group.name == targetGroupName)
+                        filteredList.push(usersList[i]);
+                callBack(filteredList);
+            }
+        });
     }
+
 
 };
 

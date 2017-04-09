@@ -355,3 +355,140 @@ doraApp.controller("MeetingsList",['$scope','$http','getItemService',function($s
     };
 
 }]);
+
+//管理会议列表
+doraApp.controller("MeetingEdit",['$scope','$http','getItemService',function($scope,$http,getItemService){
+
+    $scope.formData = {};
+    $scope.meetingInfo = {};
+    $scope.meetingInfo.schedules = [];
+    $scope.meetingInfo.usersAttend = [];
+
+    getMeetingInfo($scope, $http, $("#meeting_id").text());
+    // 修改用户
+    $('#addNewSchedule').on('show.bs.modal', function (event) {
+        var obj = $(event.relatedTarget);
+        var schedule = obj.data('whatever');
+        console.log('schedule=' + schedule);
+        // 如果不为空则为编辑状态
+        if(schedule){
+            $scope.formData = {
+                context : schedule,
+            };
+            $scope.targetID = schedule;
+        }else{
+            $scope.formData = {};
+        }
+
+    }).on('hidden.bs.modal', function (e) {
+        // 清空数据
+        clearModalData($scope,$(this));
+    });
+
+    $('#addNewUser').on('show.bs.modal', function (event) {
+        var obj = $(event.relatedTarget);
+            $scope.formData = {};
+    }).on('hidden.bs.modal', function (e) {
+        // 清空数据
+        clearModalData($scope,$(this));
+    });
+
+    $('#addNewGroup').on('show.bs.modal', function (event) {
+        var obj = $(event.relatedTarget);
+            $scope.formData = {};
+    }).on('hidden.bs.modal', function (e) {
+        // 清空数据
+        clearModalData($scope,$(this));
+    });
+
+    //添加议程
+    $scope.processScheduleForm = function(isValid){
+            // angularHttpPost($http,isValid,getTargetPostUrl($scope, 'MeetingsList'), $scope.formData, function(data){
+            //     initPagination($scope,$http, 'MeetingsList');
+            // });
+            if ($scope.targetID) {
+                for (let i = 0; i < $scope.meetingInfo.schedules.length; i++)
+                    if ($scope.meetingInfo.schedules[i] == $scope.targetID) {
+                        $scope.meetingInfo.schedules[i] = $scope.formData.context;
+                        break;
+                    }
+                $('#addNewSchedule').modal('hide');
+            }
+            else {
+                $scope.meetingInfo.schedules.push($scope.formData.context);
+            }
+           
+    };
+    // 添加用户
+    $scope.processUserForm = function(isValid){
+            // angularHttpPost($http,isValid,getTargetPostUrl($scope, 'MeetingsList'), $scope.formData, function(data){
+            //     initPagination($scope,$http, 'MeetingsList');
+            // });
+            $http.get('/admin/manage/usersList/findByName?name='+$scope.formData.name).success(function(user) {
+                if (user) {
+                    $scope.meetingInfo.usersAttend.push(user);
+                }
+                else {
+                    $.tipsShow({
+                        message : '该用户不存在',
+                        type : 'warning' ,
+                        callBack : function(){
+                            return;
+                        }
+                    });
+                }
+            });
+    };
+    // 添加用户组
+    $scope.processGroupForm = function(isValid){
+            // angularHttpPost($http,isValid,getTargetPostUrl($scope, 'MeetingsList'), $scope.formData, function(data){
+            //     initPagination($scope,$http, 'MeetingsList');
+            // });
+            $http.get('/admin/manage/usersList/findByGroupName?groupName='+$scope.formData.groupName).success(function(usersList) {
+                if (usersList) {
+                    for (let i = 0; i < usersList.length; i++) {
+                        let flag = false;
+                        for (let j = 0; j < $scope.meetingInfo.usersAttend.length; j++)
+                            if ($scope.meetingInfo.usersAttend[j]._id == usersList[i]._id) {
+                                flag = true; break;
+                            }
+                        if (!flag) $scope.meetingInfo.usersAttend.push(usersList[i]);
+                    }
+                }
+                else {
+                    $.tipsShow({
+                        message : '该用户组中没有用户！',
+                        type : 'warning' ,
+                        callBack : function(){
+                            return;
+                        }
+                    });
+                }
+            });
+    };
+    $scope.delUser = function(user) {
+        for (let i = 0; i < $scope.meetingInfo.usersAttend.length; i++)
+            if ($scope.meetingInfo.usersAttend[i] == user) { 
+                $scope.meetingInfo.usersAttend.splice(i, 1);
+                break;
+            }
+    }
+
+    $scope.delSchedule = function(schedule) {
+        for (let i = 0; i < $scope.meetingInfo.schedules.length; i++)
+            if ($scope.meetingInfo.schedules[i] == schedule) { 
+                $scope.meetingInfo.schedules.splice(i, 1);
+                break;
+            }
+    }
+
+    $scope.saveModify = function() {
+        angularHttpPost($http, true, '/admin/manage/meetingsList/edit?id=' + $("#meeting_id").text(), $scope.meetingInfo, function(data){
+            console.log("save meeting! " + data);
+            if (data == 'success') alert('保存数据成功！');
+            getMeetingInfo($scope, $http, $("#meeting_id").text());
+        });
+    }
+
+}]);
+

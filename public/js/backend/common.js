@@ -281,6 +281,13 @@ function getPageInfos($scope,$http,url,reqType){
 
     })
 }
+//获取指定会议的信息
+function getMeetingInfo($scope, $http, meeting_id) {
+    $http.get("/admin/manage/MeetingsList/item?uid="+meeting_id).success(function(data){
+        console.log("meeting item=" + data);
+        $scope.meetingInfo = data;
+    });
+}
 
 //初始化普通列表分页
 function initPagination($scope,$http, bigCategory){

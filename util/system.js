@@ -216,7 +216,9 @@ var system = {
         console.log("filepath="+file.path);
         if (file.name.endsWith('doc') || file.name.endsWith('docx')
             || file.name.endsWith('xls') || file.name.endsWith('xlsx')
-            || file.name.endsWith('ppt') || file.name.endsWith('pptx')) {
+            || file.name.endsWith('ppt') || file.name.endsWith('pptx')
+            || file.name.endsWith('jpg') || file.name.endsWith('jpeg')
+            || file.name.endsWith('bmp') || file.name.endsWith('png')) {
                 let filepath = settings.UPLOADFOLDER + file.path;
                 let cmdstr = 'unoconv -f pdf "' + filepath + '"';
                 let newfile = filepath.substr(0, filepath.lastIndexOf(".")) + ".pdf";

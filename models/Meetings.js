@@ -22,6 +22,7 @@ var MeetingsSchema = new Schema({
     schedules: [{type: String}],
     groupsAttend : [{type: String, ref: "Groups"}],
     usersAttend : [{type: String, ref: "Users"}],
+    usersCheckIn : [{type: String}],
 });
 
 MeetingsSchema.statics = {

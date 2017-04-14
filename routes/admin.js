@@ -430,6 +430,19 @@ router.post('/manage/meetingsList/edit', function(req, res) {
     modifyMeetingInfo(res, meetingId, meetingInfo);
 });
 
+router.get('/manage/meetingsList/checkIn', function(req, res) {
+    var params = url.parse(req.url,true);
+    var meetingId = params.query.mid;
+    var userName = params.query.userName;
+    checkInMeeting(res, meetingId, userName);
+});
+
+router.get('/manage/meetingsList/checkOut', function(req, res) {
+    var pararms = url.parse(req.url, true);
+    var meetingId = params.query.id;
+    var userName = params.query.userName;
+    checkOutMeeting(res, meetingId, userName);
+});
 
 
 //-----------公共函数------
@@ -498,13 +511,37 @@ function addOneMeeting(req, res) {
 function modifyMeetingInfo(res, meetingId, meetingInfo) {
     Meetings.update({_id: meetingId}, {$set: meetingInfo}, function (err, result) {
         if (err) {
-            res.end('修改会议出现错误');
+            res.json('修改会议出现错误');
         }
         else {
-            res.end('success');
+            res.json('success');
         }
     });
 
+}
+
+//增加会议签到信息
+function checkInMeeting(res, meetingId, userName) {
+    Meetings.update({_id: meetingId}, {$push: {'usersCheckIn': userName}}, function(err, result) {
+        if (err) {
+            res.json({state:'签到失败'});
+        }
+        else {
+            res.json('success');
+        }
+    })
+}
+
+//删除会议签到信息
+function checkOutMeeting(res, meetingId, userName) {
+    Meetings.update({_id: meetingId}, {$pull: {'usersCheckIn': userName}}, function(err, result) {
+        if (err) {
+            res.json({state:'签出失败'});
+        }
+        else {
+            res.json('success');
+        }
+    })
 }
 
 module.exports = router;
